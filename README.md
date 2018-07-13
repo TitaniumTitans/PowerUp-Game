@@ -21,9 +21,14 @@ The server will send back the ID of the new robot (Unsigned Short). ID 255 means
 ### To remove a robot, send `-ROBOT_ID\n`
 The server will send back a `-`, at which point the client may leave.
 
+### To request the background image, send `{`
+The server will send you the image.
+
 ## Server-to-client protocol
 
 "+ROBOT_ID:ROBOT_NAME\n" means that the server registered a new robot named ROBOT_NAME.
 "-ROBOT_ID\n" means that the server removed robot ROBOT_ID.
 
 "@ROBOT_ID:4_BYTE_X,4_BYTE_Y,1_BYTE_DEGREES\n" means that robot ROBOT_ID is now positioned at 4_BYTE_X, 4_BYTE_Y, and rotated at 1_BYTE_DEGREES.
+
+"{4_BYTE_WIDTH4_BYTE_COLOR4_BYTE_COLOR"..."4_BYTE_COLOR}\n" - the background image.
