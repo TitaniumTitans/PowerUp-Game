@@ -1,13 +1,12 @@
 /*
-  Ethan A. Black
-  
-  Server for the FRC simulation.
+  Owned by Ethan A. Black.
+
+  Main script for the FRC Simulation System.
 */
 
 import processing.net.*;
 
 Server server;
-//ArrayList<Client> clients = new ArrayList<Client> ();
 Client newClient;
 String[] message;
 String[] messages;
@@ -18,7 +17,7 @@ void setup() {
   rectMode(CENTER);
   textAlign(CENTER, CENTER);
   noSmooth();
-  
+
   server = new Server(this, 10002);
 }
 
@@ -28,13 +27,13 @@ void draw () {
   for (int i = 0; i < robots.length; i++) {
     if (robots[i] == null) continue; // skip any removed robots
     robots[i].physics();
-    robots[i].draw();
+  robots[i].draw();
   }
-  
+
   if ((newClient = server.available()) != null) { // '=' on purpose
-    messages = newClient.readString().split("\n"); // just in case server recieves two messages at once
-    for (int i = 0; i < messages.length && messages[i].length() > 0; i++) {
-      println(messages[i]);
+  messages = newClient.readString().split("\n"); // just in case server recieves two messages at once
+  for (int i = 0; i < messages.length && messages[i].length() > 0; i++) {
+    println(messages[i]);
       if (messages[i].length() == 0) continue;
       if (messages[i].charAt(0) == '+') { // create a new robot:
         Robot robot = createRobot(messages[i].substring(1), random(width), random(height), random(TAU), newClient.ip());
@@ -48,14 +47,14 @@ void draw () {
         if (validID(robotID)) {
           println("[[" + robots[i].ownerIP + " Robot #" + robotID + " removed! ]]");
           if (removeRobot(robotID, newClient.ip())) {
-            newClient.write("-"); // tell it that it's robot has been removed.
-          } else {
-            newClient.write("Meanie!");
+            newClient.write("-"); // tell the client that its robot has been removed.
+          } else { // if the robot doesn't exist or isn't owned by the client:
+            newClient.write("YOU CHEATING SCUM!"); // fair and square
           }
         }
       } else { // press a key on the robot:
         message = messages[i].split(":");
-        if (message.length == 2 && message[1].length() == 2) { // if message is correctly formatted:
+          if (message.length == 2 && message[1].length() == 2) { // if message is correctly formatted:
           int robotID = parseInt(message[0]);
           if (validID(robotID)) {
             switch (message[1].charAt(1)) {
