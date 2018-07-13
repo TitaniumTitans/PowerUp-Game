@@ -71,8 +71,8 @@ class DropCenterRobot extends Robot {
     xv *= resistance;
     yv *= resistance;
     rv *= rResistance;
-    x += xv;
-    y += yv;
+    x = constrain(x + xv, 0, width);
+    y = constrain(y + yv, 0, height);
     r += rv;
   }
 }
