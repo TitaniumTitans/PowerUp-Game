@@ -8,3 +8,13 @@ repositories {
 dependencies {
 	compile group: 'org.processing', name: 'core', version: '3.3.6'
 }
+task jar(type: Jar) {
+	manifest {
+		attributes 'Implementation-Title': 'Gradle Jar File Example',  
+			'Implementation-Version': version,
+			'Main-Class': '$(project.name).main'
+	}
+	baseName = project.name + '-all'
+	from {configurations.compile.collect{it.isDirectory() ? it : zipTree(it)}}
+	with jar
+}
