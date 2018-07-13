@@ -1,7 +1,8 @@
 # Protocol
 
 ### TL;DR:
-**The standard protocol is `+ROBOT_ID\n` for connecting to robots, and `ROBOT_ID:KEY\n` for changing keys.
+**The standard protocol is `+ROBOT_ID\n` for connecting to robots, and `ROBOT_ID:KEY\n` for changing keys.**
+
 **E.g. `0:+w` will turn on w on robotID 0**
 
 **(Newline is manditory)**
