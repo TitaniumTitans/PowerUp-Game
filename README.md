@@ -1,17 +1,18 @@
 # Protocol
 
-### `robotID:keyAndPressedOrReleased\n`
-(Newline is manditory)
+### TL;DR:
+**The standard protocol is `ROBOT_ID:KEY\n`**
+**E.g. `0:+w` will turn on w on robotID 0**
+**(Newline is manditory)**
 
-Where:
-`robotName` is the name of the robot whose key you want to press;
-`key` is the key to press on the robot, with a ‘+’ before it if the key just got pressed, and a ‘-’ if the 
-key just got released.
+### To press a key, send `+key`
+This will register in the server as this key being held down indefinently.
 
-### E.g. `0:+w` will turn on w on robotID 0
+### To release a key, send `-key`
+This will register in the server as this key no longer being held down.
 
-### To create a robot, send `+ROBOT_NAME`
+### To create a robot, send `+ROBOT_ID`
 The server will send back the ID of the new robot (Unsigned Short); ID 255 means the maximum amount of robots has been reached.
 
-### To remove a robot, send `-ROBOT_NAME`
+### To remove a robot, send `-ROBOT_ID`
 The server will send back a `-`, at which point the client may leave.
