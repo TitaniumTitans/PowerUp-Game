@@ -27,14 +27,13 @@ void draw () {
   for (int i = 0; i < robots.length; i++) {
     if (robots[i] == null) continue; // skip any removed robots
     robots[i].physics();
-  robots[i].draw();
+    robots[i].draw();
   }
 
   if ((newClient = server.available()) != null) { // '=' on purpose
-  messages = newClient.readString().split("\n"); // just in case server recieves two messages at once
-  for (int i = 0; i < messages.length && messages[i].length() > 0; i++) {
-    println(messages[i]);
-      if (messages[i].length() == 0) continue;
+    messages = newClient.readString().split("\n"); // just in case server recieves two messages at once
+    for (int i = 0; i < messages.length && messages[i].length() > 0; i++) {
+      println(messages[i]);
       if (messages[i].charAt(0) == '+') { // create a new robot:
         Robot robot = createRobot(messages[i].substring(1), random(width), random(height), random(TAU), newClient.ip());
         if (robot == null) { // if no more robots are allowed:
