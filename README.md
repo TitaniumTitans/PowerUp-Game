@@ -16,7 +16,7 @@ This will register in the server as this key being held down indefinently.
 This will register in the server as this key no longer being held down.
 
 ### To create a robot, send `+ROBOT_ID\n`
-The server will send back the ID of the new robot (Unsigned Short). ID 255 means the maximum amount of robots has been reached. The server associates the client's IP address with the new robot. Only clients with the associated IP have access to that robot.
+The server will send back the ID of the new robot (int). ID 255 means the maximum amount of robots has been reached. The server associates the client's IP address with the new robot. Only clients with the associated IP have access to that robot.
 
 ### To remove a robot, send `-ROBOT_ID\n`
 The server will send back a `-`, at which point the client may leave.
