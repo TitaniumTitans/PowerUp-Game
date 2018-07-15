@@ -22,7 +22,7 @@ task server (type: Jar) {
 			}
 		}
 	}
-	baseName = project.name + ".server"
+	baseName = "server"
 	from {configurations.compile.collect{it.isDirectory() ? it : zipTree(it)}}
 	with jar
 	compileJava.source sourceSets.main.java
@@ -42,7 +42,7 @@ task client (type: Jar) {
 			}
 		}
 	}
-	baseName = project.name + ".client"
+	baseName = "client"
 	from {configurations.compile.collect{it.isDirectory() ? it : zipTree(it)}}
 	with jar
 	compileJava.source sourceSets.main.java
