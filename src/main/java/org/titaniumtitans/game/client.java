@@ -44,16 +44,10 @@ public class client extends PApplet {
 	// Runs upon exit:
 	public void exit() {
 		user.write("-" + robotID);
-		while (user.available() == 0) {}
-		if (!user.readString().equals("-")) {
-			println("Error: Server sent invalid confirmation. Forcing disconnect.");
-			// Exit
-			user.stop();
-		}
+		delay(100);
 		super.exit();
 	}
 	static public void main(String passedArgs[]) {
-		System.out.println("MAIN METHOD EXECUTED");
 		String[] appletArgs = new String[] {"org.titaniumtitans.game.client"};
 		if (passedArgs != null) {
 			PApplet.main(concat(appletArgs, passedArgs));
