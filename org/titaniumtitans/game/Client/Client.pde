@@ -1,7 +1,3 @@
-/*
-  Importaint: this is outdated. The new one with a display will be here soon!
-*/
-
 // SERVER DOESN'T SEND OUT POSITION UPDATES YET!
 import processing.net.*;
 import java.net.InetAddress;

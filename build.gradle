@@ -1,20 +1,49 @@
-description  ="""
-A 2d simulator game for FRC robots, named ${project.name}"""
+description = "A 2d simulator game for FRC robots, named ${project.name}"
 apply plugin: 'java'
-// https://mvnrepository.com/artifact/org.processing/core
 repositories {
 	mavenCentral()
 }
 dependencies {
 	compile group: 'org.processing', name: 'core', version: '3.3.6'
+	compile fileTree(dir: 'src/main/java/org/titaniumtitans/game/lib', include: '*.jar')
 }
-task jar(type: Jar) {
+task server (type: Jar) {
 	manifest {
-		attributes 'Implementation-Title': 'Gradle Jar File Example',  
-			'Implementation-Version': version,
-			'Main-Class': '$(project.name).main'
+		attributes (
+			'Implementation-Title': 'Titanium Titans Game Server',  
+			'Implementation-Version': "0.0.1",
+			'Main-Class': 'org.titaniumtitans.game.server'
+		)
 	}
-	baseName = project.name + '-all'
+	sourceSets {
+		main {
+			java {
+				srcDirs = ['src/main/java/org/titaniumtitans/game']
+			}
+		}
+	}
+	baseName = project.name + ".server"
 	from {configurations.compile.collect{it.isDirectory() ? it : zipTree(it)}}
 	with jar
+	compileJava.source sourceSets.main.java
+}
+task client (type: Jar) {
+	manifest {
+		attributes (
+			'Implementation-Title': 'Titanium Titans Game Server',  
+			'Implementation-Version': "0.0.1",
+			'Main-Class': 'org.titaniumtitans.game.client'
+		)
+	}
+	sourceSets {
+		main {
+			java {
+				srcDirs = ['src/main/java/org/titaniumtitans/game']
+			}
+		}
+	}
+	baseName = project.name + ".client"
+	from {configurations.compile.collect{it.isDirectory() ? it : zipTree(it)}}
+	with jar
+	compileJava.source sourceSets.main.java
 }
