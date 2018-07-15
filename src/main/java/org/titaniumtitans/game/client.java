@@ -17,7 +17,6 @@ import java.io.IOException;
 public class client extends PApplet {
 	private Client user;
 	private int robotID;
-	private static String[] args;
 	public void setup () {
 		user = new Client(this, "localhost", 10002);
 		// Request the creation of a new robot:
@@ -26,7 +25,9 @@ public class client extends PApplet {
 		} catch (java.net.UnknownHostException error) {
 			user.write("+unknown\n");
 		}
-		while (user.available() == 0) {}
+		while (user.available() == 0) {
+			delay(100);
+		}
 		robotID = user.read();
 		if (robotID == 255) {
 			println("The server has hit the maximum quantity of robots allowed.");
@@ -52,7 +53,8 @@ public class client extends PApplet {
 		super.exit();
 	}
 	static public void main(String passedArgs[]) {
-		String[] appletArgs = new String[] {"client"};
+		System.out.println("MAIN METHOD EXECUTED");
+		String[] appletArgs = new String[] {"org.titaniumtitans.game.client"};
 		if (passedArgs != null) {
 			PApplet.main(concat(appletArgs, passedArgs));
 		} else {
